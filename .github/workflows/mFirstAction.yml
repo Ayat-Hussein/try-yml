@@ -1,0 +1,46 @@
+name: Super-Linter
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  lint:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # Full git history is needed to get a proper list of changed files
+          fetch-depth: 0
+
+      - name: Run Super-Linter
+        uses: super-linter/super-linter@v6
+        env:
+          # All repositories must have a GITHUB_TOKEN secret
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+          # Optional: Set verbose output for debugging
+          VERBOSE: true
+          
+          # Optional: Fail the workflow if any linter finds issues
+          DISABLE_ERRORS: false
+          
+          # Optional: Specify which linters to run
+          # FILTER_REGEX_INCLUDE: .*src/.*
+          
+          # Optional: Exclude specific paths or file types
+          # FILTER_REGEX_EXCLUDE: .*test/.*
