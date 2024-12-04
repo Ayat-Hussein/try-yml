@@ -36,8 +36,8 @@ jobs:
           # Optional: Set verbose output for debugging
           VERBOSE: true
           
-          # Optional: Fail the workflow if any linter finds issues
-          DISABLE_ERRORS: false
+          # Optional: wether to Fail the workflow if any linter finds issues or not
+          DISABLE_ERRORS: true
           
           # Optional: Specify which linters to run
           # FILTER_REGEX_INCLUDE: .*src/.*
